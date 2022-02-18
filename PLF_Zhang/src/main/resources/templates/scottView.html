@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Scott</title>
+    <style>
+        #t {
+            border-collapse: collapse;
+        }
+        #t tr td, th {
+            border: 1px solid black;
+        }
+        input {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <form method="post">
+        <table>
+            <tr th:each="dept:${departments}">
+                <td>
+                    <input type="radio" onchange="submit()" name="deptno"
+                           th:text="${dept.getName()}"
+                           th:value="${dept.deptno}"
+                           th:selected="${dept.deptno == department.deptno}"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <table id="t">
+        <tr>
+            <th>Name</th>
+            <th>Job</th>
+            <th>Hiredate</th>
+            <th>Salary</th>
+            <th>Salgrade</th>
+        </tr>
+        <tr th:each="emp : ${department.employees}">
+            <td th:text="${emp.getNameFormatted}"></td>
+            <td th:text="${emp.getJobFormatted}"></td>
+            <td th:text="${emp.hiredate}"></td>
+            <td th:text="${emp.getSalaryFormatted}"></td>
+            <td th:text="${salgrades.get(emp).gradeId}"></td>
+        </tr>
+        <form action="/scottdb/addEmp" id="addEmp" th:object="${employee}" method="post">
+            <tr>
+                <td>
+                    <input type="text" form="addEmp" th:field="*{lastname}">
+                </td>
+                <td>
+                    <input type="text" form="addEmp" th:field="*{job}">
+                </td>
+                <td>
+                    <input type="text" form="addEmp" th:field="*{hiredate}">
+                </td>
+                <td>
+                    <input type="number" form="addEmp" th:field="*{salary}">
+                </td>
+                <td>
+                    <input type="submit" form="addEmp" value="add">
+                </td>
+            </tr>
+        </form>
+    </table>
+</div>
+</body>
+</html>

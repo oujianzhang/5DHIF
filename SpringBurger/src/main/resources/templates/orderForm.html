@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Burger</title>
+</head>
+<body>
+    <h1>Order Form</h1>
+    <form method="post" th:action="@{/orders}" th:object="${order}">
+        Deliver my Burger to...
+        <label for="name">Name</label>
+        <input id="name" type="text" th:field="*{name}">
+        <br>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+            Name Error
+        </span>
+
+        <label for="street">Street</label>
+        <input id="street" type="text" th:field="*{street}">
+        <br>
+        <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}">
+            Street Error
+        </span>
+
+        <label for="city">Cityt</label>
+        <input id="city" type="text" th:field="*{city}">
+        <br>
+
+        <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}">
+            City Error
+        </span>
+
+        Submit Burger
+        <input type="submit">
+    </form>
+</body>
+</html>
